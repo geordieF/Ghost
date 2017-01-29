@@ -10,7 +10,7 @@ var Promise       = require('bluebird'),
     ghost         = require('../../server'),
     errors        = require('../../server/errors'),
     db            = require('../../server/data/db'),
-    fixtureUtils  = require('../../server/data/migration/fixtures/utils'),
+    fixtureUtils  = require('../../server/data/schema/fixtures/utils'),
     models        = require('../../server/models'),
     SettingsAPI   = require('../../server/api/settings'),
     permissions   = require('../../server/permissions'),
@@ -463,10 +463,6 @@ toDoList = {
   *  * `perms:obj` - initialise permissions for a particular object type
   *  * `users:roles` - create a full suite of users, one per role
  * @param {Object} toDos
- *
- * @TODO:
- *  - key: migrations-kate
- *  - call migration-runner
  */
 getFixtureOps = function getFixtureOps(toDos) {
     // default = default fixtures, if it isn't present, init with tables only

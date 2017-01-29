@@ -1,10 +1,8 @@
-#!/usr/bin/env node
-
 var config = require('./core/server/config'),
-    versioning = require('./core/server/data/schema/versioning');
+    utils = require('./core/server/utils');
 
 module.exports = {
-    currentVersion: versioning.getNewestDatabaseVersion(),
+    currentVersion: utils.ghostVersion.safe,
     database: config.get('database'),
     migrationPath: config.get('paths:migrationPath')
-}
+};

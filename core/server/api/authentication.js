@@ -216,8 +216,8 @@ authentication = {
         }
 
         function sendResetNotification(data) {
-            var baseUrl = config.get('forceAdminSSL') ? (config.get('urlSSL') || config.get('url')) : config.get('url'),
-                resetUrl = globalUtils.url.urlJoin(baseUrl, 'ghost/reset', globalUtils.encodeBase64URLsafe(data.resetToken), '/');
+            var baseUrl = config.get('forceAdminSSL') ? globalUtils.url.urlFor('home', {secure: true}, true) : globalUtils.url.urlFor('home', true),
+                resetUrl = globalUtils.url.urlJoin(baseUrl, '/ghost/reset/', globalUtils.encodeBase64URLsafe(data.resetToken), '/');
 
             return mail.utils.generateContent({
                 data: {
@@ -266,7 +266,7 @@ authentication = {
      * @param {Object} object
      * @returns {Promise<Object>} message
      */
-    resetPassword: function resetPassword(object) {
+    resetPassword: function resetPassword(object, opts) {
         var tasks, tokenIsCorrect, dbHash, options = {context: {internal: true}}, tokenParts;
 
         function validateRequest() {
@@ -341,7 +341,7 @@ authentication = {
                         }));
                     }
 
-                    spamPrevention.userLogin.reset(null, options.data.connection + tokenParts.email + 'login');
+                    spamPrevention.userLogin.reset(opts.ip, tokenParts.email + 'login');
 
                     return models.User.changePassword({
                         oldPassword: oldPassword,

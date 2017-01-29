@@ -52,7 +52,9 @@ describe('{{ghost_head}} helper', function () {
                 theme: {
                     title: 'Ghost',
                     description: 'blog description',
-                    cover: '/content/images/blog-cover.png'
+                    cover: '/content/images/blog-cover.png',
+                    amp: true,
+                    icon: 'core/shared/favicon.ico'
                 }
             });
         });
@@ -67,6 +69,7 @@ describe('{{ghost_head}} helper', function () {
                 {data: {root: {context: ['paged', 'index']}}}
             ).then(function (rendered) {
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="core\/shared\/favicon.ico" type="x-icon" \/>/);
                 rendered.string.should.match(/<link rel="canonical" href="http:\/\/testurl.com\/page\/2\/" \/>/);
                 rendered.string.should.match(/<meta name="generator" content="Ghost 0.3" \/>/);
                 rendered.string.should.match(/<link rel="alternate" type="application\/rss\+xml" title="Ghost" href="http:\/\/testurl.com\/rss\/" \/>/);
@@ -83,6 +86,7 @@ describe('{{ghost_head}} helper', function () {
                 {data: {root: {context: ['home', 'index']}}}
             ).then(function (rendered) {
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="core\/shared\/favicon.ico" type="x-icon" \/>/);
                 rendered.string.should.match(/<link rel="canonical" href="http:\/\/testurl.com\/" \/>/);
                 rendered.string.should.match(/<meta name="referrer" content="no-referrer-when-downgrade" \/>/);
                 rendered.string.should.match(/<meta property="og:site_name" content="Ghost" \/>/);
@@ -135,6 +139,7 @@ describe('{{ghost_head}} helper', function () {
                 {data: {root: {context: ['page']}}}
             ).then(function (rendered) {
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="core\/shared\/favicon.ico" type="x-icon" \/>/);
                 rendered.string.should.match(/<link rel="canonical" href="http:\/\/testurl.com\/about\/" \/>/);
                 rendered.string.should.match(/<meta name="referrer" content="no-referrer-when-downgrade" \/>/);
                 rendered.string.should.match(/<meta property="og:site_name" content="Ghost" \/>/);
@@ -181,6 +186,7 @@ describe('{{ghost_head}} helper', function () {
                 {data: {root: {context: ['tag']}}}
             ).then(function (rendered) {
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="core\/shared\/favicon.ico" type="x-icon" \/>/);
                 rendered.string.should.match(/<link rel="canonical" href="http:\/\/testurl.com\/tag\/tagtitle\/" \/>/);
                 rendered.string.should.match(/<meta property="og:site_name" content="Ghost" \/>/);
                 rendered.string.should.match(/<meta property="og:type" content="website" \/>/);
@@ -222,6 +228,7 @@ describe('{{ghost_head}} helper', function () {
                 {data: {root: {context: ['tag']}}}
             ).then(function (rendered) {
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="core\/shared\/favicon.ico" type="x-icon" \/>/);
                 rendered.string.should.match(/<link rel="canonical" href="http:\/\/testurl.com\/tag\/tagtitle\/" \/>/);
                 rendered.string.should.match(/<meta property="og:site_name" content="Ghost" \/>/);
                 rendered.string.should.match(/<meta property="og:type" content="website" \/>/);
@@ -262,6 +269,7 @@ describe('{{ghost_head}} helper', function () {
                 {data: {root: {context: ['tag']}}}
             ).then(function (rendered) {
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="core\/shared\/favicon.ico" type="x-icon" \/>/);
                 rendered.string.should.not.match(/<meta property="og:description" \/>/);
                 rendered.string.should.not.match(/<meta name="twitter:description"\/>/);
                 rendered.string.should.not.match(/"description":/);
@@ -283,6 +291,7 @@ describe('{{ghost_head}} helper', function () {
                 {data: {root: {context: ['tag']}}}
             ).then(function (rendered) {
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="core\/shared\/favicon.ico" type="x-icon" \/>/);
                 rendered.string.should.match(/<link rel="canonical" href="http:\/\/testurl.com\/tag\/tagtitle\/page\/2\/" \/>/);
                 rendered.string.should.match(/<meta name="generator" content="Ghost 0.3" \/>/);
                 rendered.string.should.match(/<link rel="alternate" type="application\/rss\+xml" title="Ghost" href="http:\/\/testurl.com\/rss\/" \/>/);
@@ -310,6 +319,7 @@ describe('{{ghost_head}} helper', function () {
                 {data: {root: {context: ['author']}}}
             ).then(function (rendered) {
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="core\/shared\/favicon.ico" type="x-icon" \/>/);
                 rendered.string.should.match(/<link rel="canonical" href="http:\/\/testurl.com\/author\/AuthorName\/" \/>/);
                 rendered.string.should.match(/<meta property="og:site_name" content="Ghost" \/>/);
                 rendered.string.should.match(/<meta property="og:type" content="profile" \/>/);
@@ -355,6 +365,7 @@ describe('{{ghost_head}} helper', function () {
                 {data: {root: {context: ['paged', 'author']}}}
             ).then(function (rendered) {
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="core\/shared\/favicon.ico" type="x-icon" \/>/);
                 rendered.string.should.match(/<link rel="canonical" href="http:\/\/testurl.com\/author\/AuthorName\/page\/2\/" \/>/);
                 rendered.string.should.match(/<meta name="generator" content="Ghost 0.3" \/>/);
                 rendered.string.should.match(/<link rel="alternate" type="application\/rss\+xml" title="Ghost" href="http:\/\/testurl.com\/rss\/" \/>/);
@@ -371,6 +382,7 @@ describe('{{ghost_head}} helper', function () {
                 {data: {root: {context: []}}}
             ).then(function (rendered) {
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="core\/shared\/favicon.ico" type="x-icon" \/>/);
                 rendered.string.should.match(/<meta name="generator" content="Ghost 0.9" \/>/);
                 rendered.string.should.match(/<link rel="alternate" type="application\/rss\+xml" title="Ghost" href="http:\/\/testurl.com\/rss\/" \/>/);
 
@@ -408,6 +420,7 @@ describe('{{ghost_head}} helper', function () {
                     re4 = new RegExp('"dateModified": "' + post.updated_at);
 
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="core\/shared\/favicon.ico" type="x-icon" \/>/);
                 rendered.string.should.match(/<link rel="canonical" href="http:\/\/testurl.com\/post\/" \/>/);
                 rendered.string.should.match(/<link rel="amphtml" href="http:\/\/testurl.com\/post\/amp\/" \/>/);
                 rendered.string.should.match(/<meta property="og:site_name" content="Ghost" \/>/);
@@ -486,6 +499,7 @@ describe('{{ghost_head}} helper', function () {
                     re4 = new RegExp('"dateModified": "' + post.updated_at);
 
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="core\/shared\/favicon.ico" type="x-icon" \/>/);
                 rendered.string.should.match(/<link rel="canonical" href="http:\/\/testurl.com\/post\/" \/>/);
                 rendered.string.should.not.match(/<link rel="amphtml" href="http:\/\/testurl.com\/post\/amp\/" \/>/);
                 rendered.string.should.match(/<meta property="og:site_name" content="Ghost" \/>/);
@@ -564,6 +578,7 @@ describe('{{ghost_head}} helper', function () {
                     re4 = new RegExp('"dateModified": "' + post.updated_at);
 
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="core\/shared\/favicon.ico" type="x-icon" \/>/);
                 rendered.string.should.match(/<link rel="canonical" href="http:\/\/testurl.com\/post\/" \/>/);
                 rendered.string.should.match(/<link rel="amphtml" href="http:\/\/testurl.com\/post\/amp\/" \/>/);
                 rendered.string.should.match(/<meta property="og:site_name" content="Ghost" \/>/);
@@ -640,6 +655,7 @@ describe('{{ghost_head}} helper', function () {
                     re4 = new RegExp('"dateModified": "' + post.updated_at);
 
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="core\/shared\/favicon.ico" type="x-icon" \/>/);
                 rendered.string.should.match(/<link rel="canonical" href="http:\/\/testurl.com\/post\/" \/>/);
                 rendered.string.should.match(/<link rel="amphtml" href="http:\/\/testurl.com\/post\/amp\/" \/>/);
                 rendered.string.should.match(/<meta property="og:site_name" content="Ghost" \/>/);
@@ -714,6 +730,7 @@ describe('{{ghost_head}} helper', function () {
                     re4 = new RegExp('"dateModified": "' + post.updated_at);
 
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="core\/shared\/favicon.ico" type="x-icon" \/>/);
                 rendered.string.should.match(/<link rel="canonical" href="http:\/\/testurl.com\/post\/" \/>/);
                 rendered.string.should.match(/<link rel="amphtml" href="http:\/\/testurl.com\/post\/amp\/" \/>/);
                 rendered.string.should.match(/<meta property="og:site_name" content="Ghost" \/>/);
@@ -765,6 +782,7 @@ describe('{{ghost_head}} helper', function () {
                 {data: {root: {context: ['featured']}}}
             ).then(function (rendered) {
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="core\/shared\/favicon.ico" type="x-icon" \/>/);
                 rendered.string.should.match(/<link rel="canonical" href="http:\/\/testurl.com\/featured\/" \/>/);
                 rendered.string.should.match(/<meta name="generator" content="Ghost 0.3" \/>/);
                 rendered.string.should.match(/<link rel="alternate" type="application\/rss\+xml" title="Ghost" href="http:\/\/testurl.com\/rss\/" \/>/);
@@ -793,6 +811,7 @@ describe('{{ghost_head}} helper', function () {
                 {data: {root: {context: ['post']}}}
             ).then(function (rendered) {
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="core\/shared\/favicon.ico" type="x-icon" \/>/);
                 rendered.string.should.match(/<link rel="amphtml" href="http:\/\/testurl.com\/post\/amp\/" \/>/);
                 rendered.string.should.match(/<meta property="og:description" content="This is a short post" \/>/);
                 rendered.string.should.match(/<meta name="twitter:description" content="This is a short post" \/>/);
@@ -815,6 +834,7 @@ describe('{{ghost_head}} helper', function () {
                 {data: {root: {context: ['page']}}}
             ).then(function (rendered) {
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="core\/shared\/favicon.ico" type="x-icon" \/>/);
                 rendered.string.should.match(/<link rel="canonical" href="http:\/\/testurl.com\/about\/" \/>/);
                 rendered.string.should.match(/<meta name="generator" content="Ghost 0.3" \/>/);
                 rendered.string.should.match(/<link rel="alternate" type="application\/rss\+xml" title="Ghost" href="http:\/\/testurl.com\/rss\/" \/>/);
@@ -829,6 +849,7 @@ describe('{{ghost_head}} helper', function () {
                 {data: {root: {context: ['index', 'paged'], pagination: {total: 4, page: 3, next: 4, prev: 2}}}}
             ).then(function (rendered) {
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="core\/shared\/favicon.ico" type="x-icon" \/>/);
                 rendered.string.should.match(/<link rel="canonical" href="http:\/\/testurl.com\/page\/3\/" \/>/);
                 rendered.string.should.match(/<meta name="generator" content="Ghost 0.3" \/>/);
                 rendered.string.should.match(/<link rel="prev" href="http:\/\/testurl.com\/page\/2\/" \/>/);
@@ -847,6 +868,7 @@ describe('{{ghost_head}} helper', function () {
                 {data: {root: {context: ['index', 'paged'], pagination: {total: 3, page: 2, next: 3, prev: 1}}}}
             ).then(function (rendered) {
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="core\/shared\/favicon.ico" type="x-icon" \/>/);
                 rendered.string.should.match(/<link rel="canonical" href="http:\/\/testurl.com\/page\/2\/" \/>/);
                 rendered.string.should.match(/<meta name="generator" content="Ghost 0.3" \/>/);
                 rendered.string.should.match(/<link rel="prev" href="http:\/\/testurl.com\/" \/>/);
@@ -866,7 +888,9 @@ describe('{{ghost_head}} helper', function () {
                     theme: {
                         title: 'Ghost',
                         description: 'blog description',
-                        cover: '/content/images/blog-cover.png'
+                        cover: '/content/images/blog-cover.png',
+                        amp: true,
+                        icon: '/content/images/favicon.png'
                     }
                 });
             });
@@ -877,6 +901,7 @@ describe('{{ghost_head}} helper', function () {
                     {data: {root: {context: []}}}
                 ).then(function (rendered) {
                     should.exist(rendered);
+                    rendered.string.should.match(/<link rel="shortcut icon" href="\/content\/images\/favicon.png" type="png" \/>/);
                     rendered.string.should.match(/<link rel="canonical" href="http:\/\/testurl.com\/blog\/" \/>/);
                     rendered.string.should.match(/<meta name="generator" content="Ghost 0.3" \/>/);
                     rendered.string.should.match(/<link rel="alternate" type="application\/rss\+xml" title="Ghost" href="http:\/\/testurl.com\/blog\/rss\/" \/>/);
@@ -894,7 +919,9 @@ describe('{{ghost_head}} helper', function () {
                 theme: {
                     title: 'Ghost',
                     description: 'blog description',
-                    cover: '/content/images/blog-cover.png'
+                    cover: '/content/images/blog-cover.png',
+                    amp: true,
+                    icon: '/content/images/favicon.png'
                 },
                 referrerPolicy: 'origin'
             });
@@ -906,6 +933,7 @@ describe('{{ghost_head}} helper', function () {
                 {data: {root: {context: []}}}
             ).then(function (rendered) {
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="\/content\/images\/favicon.png" type="png" \/>/);
                 rendered.string.should.match(/<meta name="referrer" content="origin" \/>/);
 
                 done();
@@ -920,7 +948,9 @@ describe('{{ghost_head}} helper', function () {
                 theme: {
                     title: 'Ghost',
                     description: 'blog description',
-                    cover: '/content/images/blog-cover.png'
+                    cover: '/content/images/blog-cover.png',
+                    amp: true,
+                    icon: '/content/images/favicon.png'
                 },
                 privacy: {
                     useStructuredData: false
@@ -952,6 +982,7 @@ describe('{{ghost_head}} helper', function () {
                 {data: {root: {context: ['post']}}}
             ).then(function (rendered) {
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="http:\/\/testurl.com\/content\/images\/favicon.png" type="png" \/>/);
                 rendered.string.should.match(/<link rel="canonical" href="http:\/\/testurl.com\/post\/" \/>/);
                 rendered.string.should.match(/<link rel="amphtml" href="http:\/\/testurl.com\/post\/amp\/" \/>/);
                 rendered.string.should.match(/<meta name="generator" content="Ghost 0.3" \/>/);
@@ -975,7 +1006,8 @@ describe('{{ghost_head}} helper', function () {
                 theme: {
                     title: 'Ghost',
                     description: 'blog description',
-                    cover: '/content/images/blog-cover.png'
+                    cover: '/content/images/blog-cover.png',
+                    icon: '/content/images/favicon.png'
                 }
             });
         });
@@ -986,6 +1018,7 @@ describe('{{ghost_head}} helper', function () {
                 {data: {root: {context: []}}}
             ).then(function (rendered) {
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="http:\/\/testurl.com\/content\/images\/favicon.png" type="png" \/>/);
                 rendered.string.should.match(/<link rel="canonical" href="http:\/\/testurl.com\/" \/>/);
                 rendered.string.should.match(/<meta name="generator" content="Ghost 0.3" \/>/);
                 rendered.string.should.match(/<link rel="alternate" type="application\/rss\+xml" title="Ghost" href="http:\/\/testurl.com\/rss\/" \/>/);
@@ -1018,6 +1051,7 @@ describe('{{ghost_head}} helper', function () {
                 {data: {root: {context: []}}}
             ).then(function (rendered) {
                 should.exist(rendered);
+                rendered.string.should.match(/<link rel="shortcut icon" href="http:\/\/testurl.com\/content\/images\/favicon.png" type="png" \/>/);
                 rendered.string.should.match(/<link rel="canonical" href="http:\/\/testurl.com\/" \/>/);
                 rendered.string.should.match(/<meta name="generator" content="Ghost 0.3" \/>/);
                 rendered.string.should.match(/<link rel="alternate" type="application\/rss\+xml" title="Ghost" href="http:\/\/testurl.com\/rss\/" \/>/);
@@ -1089,6 +1123,46 @@ describe('{{ghost_head}} helper', function () {
 
                 done();
             });
+        });
+    });
+
+    describe('amp is disabled', function () {
+        beforeEach(function () {
+            configUtils.set({
+                url: 'http://testurl.com/',
+                theme: {
+                    amp: false
+                }
+            });
+        });
+
+        it('does not contain amphtml link', function (done) {
+            var post = {
+                meta_description: 'blog description',
+                title: 'Welcome to Ghost',
+                image: 'content/images/test-image.png',
+                published_at:  moment('2008-05-31T19:18:15').toISOString(),
+                updated_at: moment('2014-10-06T15:23:54').toISOString(),
+                tags: [{name: 'tag1'}, {name: 'tag2'}, {name: 'tag3'}],
+                author: {
+                    name: 'Author name',
+                    url: 'http//:testauthorurl.com',
+                    slug: 'Author',
+                    image: 'content/images/test-author-image.png',
+                    website: 'http://authorwebsite.com',
+                    facebook: 'testuser',
+                    twitter: '@testuser'
+                }
+            };
+
+            helpers.ghost_head.call(
+                {relativeUrl: '/post/', safeVersion: '0.3', context: ['post'], post: post},
+                {data: {root: {context: ['post']}}}
+            ).then(function (rendered) {
+                should.exist(rendered);
+                rendered.string.should.not.match(/<link rel="amphtml"/);
+                done();
+            }).catch(done);
         });
     });
 });

@@ -36,7 +36,8 @@ describe('Config', function () {
                     description: 'casper',
                     logo: 'casper',
                     cover: 'casper',
-                    timezone: 'Etc/UTC'
+                    timezone: 'Etc/UTC',
+                    icon: 'core/shared/favicon.ico'
                 }
             });
         });
@@ -45,7 +46,7 @@ describe('Config', function () {
             var themeConfig = config.get('theme');
 
             // This will fail if there are any extra keys
-            themeConfig.should.have.keys('title', 'description', 'logo', 'cover', 'timezone');
+            themeConfig.should.have.keys('title', 'description', 'logo', 'cover', 'timezone', 'icon');
         });
 
         it('should have the correct values for each key', function () {
@@ -57,6 +58,7 @@ describe('Config', function () {
             themeConfig.should.have.property('logo', 'casper');
             themeConfig.should.have.property('cover', 'casper');
             themeConfig.should.have.property('timezone', 'Etc/UTC');
+            themeConfig.should.have.property('icon', 'core/shared/favicon.ico');
         });
     });
 

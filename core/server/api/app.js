@@ -35,17 +35,13 @@ var debug = require('debug')('ghost:api'),
     authenticatePublic = [
         auth.authenticate.authenticateClient,
         auth.authenticate.authenticateUser,
-        auth.authorize.requiresAuthorizedUserPublicAPI,
-        // @TODO do we really need this multiple times or should it be global?
-        cors
+        auth.authorize.requiresAuthorizedUserPublicAPI
     ],
     // Require user for private endpoints
     authenticatePrivate = [
         auth.authenticate.authenticateClient,
         auth.authenticate.authenticateUser,
-        auth.authorize.requiresAuthorizedUser,
-        // @TODO do we really need this multiple times or should it be global?
-        cors
+        auth.authorize.requiresAuthorizedUser
     ];
 
 // @TODO refactor/clean this up - how do we want the routing to work long term?
@@ -170,9 +166,7 @@ function apiRoutes() {
 
     // ## Authentication
     apiRouter.post('/authentication/passwordreset',
-        // Prevent more than 5 password resets from an ip in an hour for any email address
         brute.globalReset,
-        // Prevent more than 5 password resets in an hour for an email+IP pair
         brute.userReset,
         api.http(api.authentication.generateResetToken)
     );
@@ -197,6 +191,14 @@ function apiRoutes() {
         authenticatePrivate,
         upload.single('uploadimage'),
         validation.upload({type: 'images'}),
+        api.http(api.uploads.add)
+    );
+
+    apiRouter.post('/uploads/icon',
+        authenticatePrivate,
+        upload.single('uploadimage'),
+        validation.upload({type: 'icons'}),
+        validation.blogIcon(),
         api.http(api.uploads.add)
     );
 
@@ -225,6 +227,8 @@ module.exports = function setupApiApp() {
     // Body parsing
     apiApp.use(bodyParser.json({limit: '1mb'}));
     apiApp.use(bodyParser.urlencoded({extended: true, limit: '1mb'}));
+
+    apiApp.use(cors);
 
     // send 503 json response in case of maintenance
     apiApp.use(maintenance);
